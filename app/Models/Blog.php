@@ -13,4 +13,9 @@ class Blog extends Model
     {
         return $this->belongsTo(User::class)->withDefault(['name' => '退会者']);
     }
+
+    public function comments()
+    {
+        return $this->hasMany(Comment::class);
+    }
 }
