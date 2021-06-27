@@ -11,6 +11,7 @@ class HomeController extends Controller
     {
         $blogs = Blog::with('user')
             ->withCount('comments')
+            ->onlyPublic()
             ->orderByDesc('comments_count')
             ->latest('updated_at')
             ->get();
