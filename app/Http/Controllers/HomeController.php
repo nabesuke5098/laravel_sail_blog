@@ -11,7 +11,7 @@ class HomeController extends Controller
     {
         $blogs = Blog::with('user')
             ->withCount('comments')
-            ->onlyPublic()
+            ->onlyOpen()
             ->orderByDesc('comments_count')
             ->latest('updated_at')
             ->get();
@@ -19,5 +19,15 @@ class HomeController extends Controller
         // return $blogs;
 
         return view('home', compact('blogs'));
+    }
+
+    public function show(Blog $blog)
+    {
+        $blog = Blog::first();
+        // $blog->body = ['a', 'b'];
+        // $blog->save();
+        return $blog->body->implode('-');
+        return 'OK';
+        abort_unless($blog->is_open, 403);
     }
 }
