@@ -23,11 +23,12 @@ class HomeController extends Controller
 
     public function show(Blog $blog)
     {
-        $blog = Blog::first();
+        // $blog = Blog::first();
         // $blog->body = ['a', 'b'];
         // $blog->save();
-        return $blog->body->implode('-');
-        return 'OK';
+        // return $blog->body->implode('-');
+        // return 'OK';
         abort_unless($blog->is_open, 403);
+        return view('blog.show', compact('blog'));
     }
 }

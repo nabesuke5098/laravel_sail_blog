@@ -21,7 +21,7 @@ class Blog extends Model
 
     public function comments()
     {
-        return $this->hasMany(Comment::class);
+        return $this->hasMany(Comment::class)->oldest();
     }
 
     public function scopeOnlyOpen($query)
