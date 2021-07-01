@@ -15,7 +15,7 @@
 <br>
 パスワード：<input type="password" name="password">
 
-<x-pref name="kenta" />
+<x-pref />
 
 <br><br>
 <input type="submit" value="送信">
