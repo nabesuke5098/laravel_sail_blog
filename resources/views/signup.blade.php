@@ -14,8 +14,8 @@
 メールアドレス：<input type="text" name="email" value="{{ old('email') }}">
 <br>
 パスワード：<input type="password" name="password">
-
-<x-pref />
+<br>
+都道府県：<x-pref id="myid" :default="old('pref')" />
 
 <br><br>
 <input type="submit" value="送信">

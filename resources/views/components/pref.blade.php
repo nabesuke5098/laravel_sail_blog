@@ -1,10 +1,15 @@
+@props([
+    'message' => '選択して下さい',
+    'default'
+])
+
 @php
 $prefs = ['東京都', '大阪府', '福岡県'];
 @endphp
 
-<select name="pref">
-    <option value="">選択してください</option>
+<select {{ $attributes->merge(['name' => 'pref']) }}>
+    <option value="">{{ $message }}</option>
     @foreach ($prefs as $pref)
-        <option value="{{ $pref }}" {{ $pref }}</option>
+        <option value="{{ $pref }}" {{ $pref === $default ? 'selected' : '' }}>{{ $pref }}</option>
     @endforeach
 </select>
