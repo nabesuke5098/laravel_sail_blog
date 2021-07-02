@@ -16,6 +16,9 @@
 パスワード：<input type="password" name="password">
 <br>
 都道府県：<x-pref id="myid" :default="old('pref')" />
+<br>
+住所：<input type="text" name="address" value="{{ old('adress') }}">
+東京都の場合は必須
 
 <br><br>
 <input type="submit" value="送信">
