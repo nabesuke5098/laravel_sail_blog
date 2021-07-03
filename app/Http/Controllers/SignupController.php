@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use App\Rules\TokyoAddress;
 use Illuminate\Contracts\Validation\Rule;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class SignupController extends Controller
 {
@@ -18,14 +20,21 @@ class SignupController extends Controller
         $address = mb_convert_kana($request->input('address'), 'A');
         $request->merge(compact('address'));
 
-        $request->validate([
+        $data = $request->validate([
             'name' => ['required', 'string', 'max:20'],
             'email' => ['required', 'email:filter', 'unique:users'],
             'password' => ['required', 'string', 'min:8'],
             // 'address' => ['required_if:pref,東京都']
-            'address' => [new TokyoAddress($request->input('pref'))]
+            // 'address' => [new TokyoAddress($request->input('pref'))]
         ]);
 
-        $request->dd();
+        $user = User::create([
+            'name' => $data['name'],
+            'email' => $data['email'],
+            'password' => bcrypt($data['password']),
+        ]);
+
+        Auth::login($user);
+        return redirect('mypage');
     }
 }
