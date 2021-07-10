@@ -16,5 +16,6 @@ Route::get('mypage/login', [UserLoginController::class, 'index'])->name('login')
 Route::post('mypage/login', [UserLoginController::class, 'login']);
 
 Route::middleware('auth')->group(function() {
+  Route::post('mypage/logout', [BlogController::class, 'logout']);
   Route::get('mypage', [BlogController::class, 'index']);
 });
