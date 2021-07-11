@@ -150,6 +150,8 @@ return [
         'name' => '名前',
         'email' => 'メールアドレス',
         'password' => 'パスワード',
+        'title' => 'タイトル',
+        'body' => '本文',
     ],
 
     'csrf_token_mismatch' => 'セッションが切れました。',
