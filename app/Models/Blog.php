@@ -14,6 +14,8 @@ class Blog extends Model
         'body' => 'collection',
     ];
 
+    protected $guarded = [];
+
     public function user()
     {
         return $this->belongsTo(User::class)->withDefault(['name' => '退会者']);
