@@ -152,4 +152,6 @@ return [
         'password' => 'パスワード',
     ],
 
+    'csrf_token_mismatch' => 'セッションが切れました。',
+
 ];

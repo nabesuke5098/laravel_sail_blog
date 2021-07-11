@@ -1,10 +1,27 @@
 @extends('layouts.app')
 
 @section('content')
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<script>
+function ajaxSubmit(form) {
+  axios.post('/mypage/blogs/create', 
+    new FormData(form)
+  )
+  .then(function (response) {
+    console.log(response);
+  })
+  .catch(function (error) {
+    console.log(error);
+  });
+
+  return false;
+}
+</script>
 
 <h1>マイブログ新規登録</h1>
 
-<form method="post" enctype="multipart/form-data">
+<form method="post" enctype="mltipart/form-data" onsubmit="return ajaxSubmit(this)">
+<!-- <form method="post" enctype="multipart/form-data"> -->
 @csrf
 
 @include('inc.error')
