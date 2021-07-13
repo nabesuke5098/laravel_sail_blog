@@ -9,6 +9,11 @@ use Illuminate\Support\Facades\Auth;
 
 class BlogController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('JpJsonResponse');
+    }
+
     public function index(Request $request)
     {
         // $blogs = Blog::where('user_id', Auth::id())->get();
@@ -43,7 +48,8 @@ class BlogController extends Controller
         }
         // abort_if($request->user()->isNot($blog->user), 403);
         $data = old() ?: $blog;
+        // dd(data_get($data, 'body'));
 
-        return view('mypage.blog.edit', compact('data'));
+        return view('mypage.blog.edit', compact('blog', 'data'));
     }
 }
