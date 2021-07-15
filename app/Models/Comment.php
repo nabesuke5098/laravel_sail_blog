@@ -8,4 +8,11 @@ use Illuminate\Database\Eloquent\Model;
 class Comment extends Model
 {
     use HasFactory;
+
+        protected static function booted()
+    {
+        static::deleting(function ($comment) {
+            logger('deleted '.$comment->id);
+        });
+    }
 }

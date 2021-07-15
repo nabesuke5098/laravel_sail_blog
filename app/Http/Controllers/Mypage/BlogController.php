@@ -60,4 +60,16 @@ class BlogController extends Controller
 
         return redirect(route('mypage.blog.update', $blog))->with('message', '更新しました');
     }
+
+    public function destroy(Blog $blog, Request $request)
+    {
+        abort_if($request->user()->isNot($blog->user), 403);
+
+        // $blog->comments()->delete();
+        // 付属するコメントはイベントで削除 Models/Blog
+
+        $blog->delete();
+
+        return redirect('mypage');
+    }
 }
