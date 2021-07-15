@@ -42,6 +42,15 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
+    protected static function booted()
+    {
+        static::deleting(function ($user) {
+            $user->blogs->each(function ($blog) {
+                $blog->delete();
+            });
+        });
+    }
+
     public function blogs()
     {
         return $this->hasMany(Blog::class);
