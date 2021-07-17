@@ -27,6 +27,7 @@ class BlogSaveRequest extends FormRequest
             'title' => ['required', 'string', 'max:255'],
             'body'  => ['required', 'string'],
             'is_open' => ['nullable'],
+            'pict' => ['image', 'max:5000'],
         ];
     }
 

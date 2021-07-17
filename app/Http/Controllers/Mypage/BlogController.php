@@ -31,6 +31,10 @@ class BlogController extends Controller
     {
         $data = $request->validated();
 
+        if ($request->hasFile('pict')) {
+            $data['pict'] = $request->file('pict')->store('blogs', 'public');
+        }
+
         $blog = $request->user()->blogs()->create($data);
 
         return redirect(route('mypage.blog.edit', $blog))->with('message', '新規登録しました');
@@ -55,6 +59,10 @@ class BlogController extends Controller
         }
 
         $data = $request->validated();
+
+        if ($request->hasFile('pict')) {
+            $data['pict'] = $request->file('pict')->store('blogs', 'public');
+        }
 
         $blog->update($data);
 
