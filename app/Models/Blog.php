@@ -27,6 +27,12 @@ class Blog extends Model
             $blog->deletePictFile();
             $blog->comments->each->delete();
         });
+
+        static::updating(function ($blog) {
+            if ($blog->isDirty('pict') && $blog->getOriginal('pict')) {
+                $blog->deletePictFile();
+            }
+        });
     }
 
     public function user()
@@ -46,8 +52,8 @@ class Blog extends Model
 
     public function deletePictFile()
     {
-        if ($this->pict) {
-            Storage::disk('public')->delete($this->pict);
+        if ($path = $this->getOriginal('pict')) {
+            Storage::disk('public')->delete($path);
         }
     }
 }

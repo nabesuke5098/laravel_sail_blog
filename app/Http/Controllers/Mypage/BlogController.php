@@ -29,11 +29,7 @@ class BlogController extends Controller
 
     public function store(BlogSaveRequest $request)
     {
-        $data = $request->validated();
-
-        if ($request->hasFile('pict')) {
-            $data['pict'] = $request->file('pict')->store('blogs', 'public');
-        }
+        $data = $request->proceed();
 
         $blog = $request->user()->blogs()->create($data);
 
@@ -58,12 +54,7 @@ class BlogController extends Controller
             abort(403);
         }
 
-        $data = $request->validated();
-
-        if ($request->hasFile('pict')) {
-            $blog->deletePictFile();
-            $data['pict'] = $request->file('pict')->store('blogs', 'public');
-        }
+        $data = $request->proceed();
 
         $blog->update($data);
 
